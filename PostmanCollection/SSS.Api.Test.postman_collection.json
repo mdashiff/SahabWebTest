@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "06d0b794-ddc7-49e3-8896-82aa707cfae4",
+		"name": "SSS.Api.Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Prodcut",
+			"item": [
+				{
+					"name": "GetProductById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 5rHmAba6aGaiuayTBs1DJuYpq5RH27SjWq3Xyv1ol2kMAfOAXC2UpnHI-keNXKq8wv5kJHUowAdmTdVMesjOevPd1H1knF03W7CNG8FOzh-ZeuM0YckGLRn8hCrOpDkI7Pe4N2x49jsFOFyrLscfOs31Xs2hmlT_bZHj_uNCaim5C8yTc3CgDIwGH_lpAU69RyIzEw8khm7eg3AM0-9lLE-flxpFXQBPMTxRZYjs8_Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44367/api/Product/GetProductById?id=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44367",
+							"path": [
+								"api",
+								"Product",
+								"GetProductById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProductById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 5rHmAba6aGaiuayTBs1DJuYpq5RH27SjWq3Xyv1ol2kMAfOAXC2UpnHI-keNXKq8wv5kJHUowAdmTdVMesjOevPd1H1knF03W7CNG8FOzh-ZeuM0YckGLRn8hCrOpDkI7Pe4N2x49jsFOFyrLscfOs31Xs2hmlT_bZHj_uNCaim5C8yTc3CgDIwGH_lpAU69RyIzEw8khm7eg3AM0-9lLE-flxpFXQBPMTxRZYjs8_Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44367/api/Product/DeleteProductById?id=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44367",
+							"path": [
+								"api",
+								"Product",
+								"DeleteProductById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListallProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44367/api/Product/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44367",
+							"path": [
+								"api",
+								"Product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductBySearch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44367/api/Product?search=board",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44367",
+							"path": [
+								"api",
+								"Product"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "board"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductListByPagination",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"skip\":0,\r\n    \"page\":1,\r\n    \"takePerPageCount\":0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44367/api/Products/ListByPagination",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44367",
+							"path": [
+								"api",
+								"Products",
+								"ListByPagination"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateRecord",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44367/api/Products/UpdateProduct",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44367",
+							"path": [
+								"api",
+								"Products",
+								"UpdateProduct"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "https://localhost:44367/api/Customer/Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\":\"mdashiff6@gmail.com\",\r\n    \"Password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44367/api/Customer/Login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44367",
+							"path": [
+								"api",
+								"Customer",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GetCustomerInfo",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer PMNCOWY5FGd-ZzzBq1K30Hrl1ljlmwoVEF0cKgaRjrr17rhv2Ja6b30H9hw7XcwfrIVRQHBfL83RyAI1UT9-7q8VSOLF1CLg-S7s9XdeJzY3W7FkbA29woVcVKd1-u1zm4zjGQHGS0YwtpZM0FEyFuc2NqsG6kfQGq3Gu-n8rBuRpkdFBHCfkFqN4E-cx8xKSE-4s5jlQsZB61eFbpeHQ0Ycl9VWsL1pbsXSdSQVzBKRDYnth9rIbK0avIN1HRZteS1Qtak65-9XodhAnPrUz0SBwKO0-Ot-uZlm0XECq7c4Cd0n1GJKrShW2atXAQzP",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44367/api/CustomerInfo/GetCustomerInfo?customerId=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44367",
+					"path": [
+						"api",
+						"CustomerInfo",
+						"GetCustomerInfo"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth Token Generation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:44367/Token",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44367",
+					"path": [
+						"Token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

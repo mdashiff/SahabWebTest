@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Product Page";
+}
+<br/>
+<ul class="nav navbar-nav">
+    <li><input type="text" id="productSearch"/></li>
+    <li><input type="submit" value="Search" id="search" /></li>
+</ul>
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th class="center">Name</th>
+            <th class="center">Description</th>
+            <th class="center">Item Quantity</th>
+            <th class="center">Item Price</th>
+            <th class="center">Stock Availability</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="products"></tbody>
+</table>
+
+
+<script>
+    function GetProduct() {    
+    $.ajax({
+        url: "/api/Product",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var row = "";
+            if (data.isSuccess) {
+                $.each(data.data, function (index, item) {
+                    var available = item.availabilityStatus ? "Available" : "Out of Stock";
+                    row += "<tr><td>" + item.name + "</td><td>" + item.description + "</td><td>" + item.itemCount + "</td><td>" + item.itemPrice + "</td><td>" + available + "</td><td><button onclick='Edit(" + item.id + ")'>Edit</button></td><td><button onclick='Delete(" + item.id + ")'>Delete</button></td></tr>";
+                });
+            }
+            else {
+                alert(data.message);
+                row += "<tr><td colspan=5>No Records to Display</td></tr>"
+            }
+            $("#products").append(row);
+
+        },
+        error: function (result) {
+            alert("Error");
+        }
+    });
+    }
+    function Edit(id) {
+        var bearerToken = sessionStorage.getItem('accessToken');
+        if (bearerToken) {
+            window.location.href = "/Product/Update?id="+id;
+        }
+        else alert("Please login to edit the product");
+    }
+    function Delete(id) {
+        var bearerToken = sessionStorage.getItem('accessToken');
+        if (bearerToken) {
+            var authHeaders = {};
+            authHeaders.Authorization = 'Bearer ' + bearerToken;
+            $.ajax({
+                url: "/api/Product/CreateProduct?id=" + id,
+                type: "PUT",
+                contentType: 'application/json',
+                headers: authHeaders,
+                success: function (response) {
+
+                    $("#msg").text(response.message);
+                    alert(response.message);
+                    window.location.href = "/";
+
+                },
+                error: function () {
+                    $("#msg").text("Authentication failed");
+                }
+            });
+        }
+        else alert("Please login to delete the product");
+    }
+    GetProduct()
+    $("#search").on('click', function () {
+        var searchString = $("#productSearch").val();
+        if (!searchString) {
+            alert("Enter search string to continue");
+            return;
+        }
+        
+        $.ajax({
+            url: "/api/Product?search=" + searchString,
+            type: "GET",
+            success: function (data) {
+
+                var row = "";
+                if (data.isSuccess) {
+                    $("#products").empty();
+                    $.each(data.data, function (index, item) {
+                        var available = item.availabilityStatus ? "Available" : "Out of Stock";
+                        row += "<tr><td>" + item.name + "</td><td>" + item.description + "</td><td>" + item.itemCount + "</td><td>" + item.itemPrice + "</td><td>" + available + "</td><td><button onclick='Edit(" + item.id + ")'>Edit</button></td><td><button onclick='Delete(" + item.id + ")'>Delete</button></td></tr>";
+                    });
+                } else {
+                    alert(data.message);
+                    $("#products").empty();
+                    row+="<tr><td colspan=5>No Records to Display</td></tr>"
+                }
+                $("#products").append(row);
+
+            },
+            error: function () {
+                $("#msg").text("Authentication failed");
+            }
+        });
+
+
+    });
+</script>

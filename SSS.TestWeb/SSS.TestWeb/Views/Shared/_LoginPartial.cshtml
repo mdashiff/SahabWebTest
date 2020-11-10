@@ -1,0 +1,15 @@
+﻿
+
+    <ul id="showUser" style="display:none;" class="nav navbar-nav navbar-right">
+        <li>
+            Hello! 
+        </li>
+        <li><a id="logoff">Log off</a></li>
+    </ul>
+    
+
+    <ul id="showNavBar" class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Login", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Index", "Login", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+

@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Product";
+}
+
+<h2>Create Product</h2>
+<div id="loginDiv" style="width:50%">
+    <div class="form-group">
+        <label for="txtEmail">Product Name</label>
+        <input type="text" name="name" id="productName" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" id="productDescription" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Item Count</label>
+        <input type="number" id="itemCount" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Item Price</label>
+        <input type="number" id="itemPrice" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Availability Status</label>
+        <input type="radio" id="Product_Available" name="Product_Available" value="true">
+        <label for="male">Available</label><br>
+        <input type="radio" id="Product_Available" name="Product_Available" value="false">
+        <label for="male">Out of Stock</label><br>
+    </div>
+    <button id="btnProductSubmit" class="btn btn-default">Submit</button>
+</div>
+<div>
+    <label id="msg"></label>
+</div>
+<script>
+    $(document).ready(function () {
+        debugger
+        var redirectURL = '/';
+        var bearerToken = sessionStorage.getItem('accessToken');
+        if (!bearerToken) {
+            alert("user is not authorized to create a product. Please login to continue")
+            window.location.href = "/Login";
+            return;
+        }
+        $("#btnProductSubmit").on('click', function () {
+            var productData = {};
+            productData.Name = $("#productName").val();
+            productData.Description = $("#productDescription").val();
+            productData.ItemCount = $("#itemCount").val();
+            productData.ItemPrice = $("#itemPrice").val();
+            productData.AvailabilityStatus = $("#Product_Available").val();
+            if (!productData.Name) {
+                alert("Please enter Product Name");
+            }
+            if (!productData.Description) {
+                alert("Please enter Product Description");
+            }
+            if (productData.ItemCount <= 0) {
+                alert("Please enter Quantity of Product");
+            }
+            if (productData.ItemPrice <= 0) {
+                alert("Please enter Price of the product");
+            }
+            var authHeaders = {};
+            authHeaders.Authorization = 'Bearer ' + resp.bearerToken;
+            $.ajax({
+                url: "/api/Product/CreateProduct",
+                type: "POST",
+                headers: authHeaders,
+                data: JSON.stringify(productData),
+                contentType : "application/json",
+                success: function (response) {
+                   
+                    $("#msg").text(response.Message);
+                    alert(response.Message);
+                    window.location.href = "/";
+
+                },
+                  error: function () {
+                    $("#msg").text("Authentication failed");
+                }
+            });
+
+       
+        });
+       
+
+
+
+
+    });
+</script>

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SahabTest2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderNumber" Type="nvarchar(max)" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderNumber" Type="nvarchar(max)" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="IsPaid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ItemCount" Type="int" Nullable="false" />
+          <Property Name="ItemPrice" Type="int" Nullable="false" />
+          <Property Name="AvailabilityStatus" Type="bit" Nullable="false" />
+          <Property Name="ProductStatusId" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="FetchDetailsByCustomerId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="JsonOutput" Type="varchar" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="SahabTest2ModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SahabTest2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DALEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="FetchDetailsByCustomerId">
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="JsonOutput" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Customers" EntityType="SahabTest2Model.Customer" />
+          <EntitySet Name="OrderDetails" EntityType="SahabTest2Model.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="SahabTest2Model.Order" />
+          <EntitySet Name="Products" EntityType="SahabTest2Model.Product" />
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemCount" Type="Int32" Nullable="false" />
+          <Property Name="ItemPrice" Type="Int32" Nullable="false" />
+          <Property Name="AvailabilityStatus" Type="Boolean" Nullable="false" />
+          <Property Name="ProductStatusId" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SahabTest2ModelStoreContainer" CdmEntityContainer="DALEntities">
+          <FunctionImportMapping FunctionImportName="FetchDetailsByCustomerId" FunctionName="SahabTest2Model.Store.FetchDetailsByCustomerId" />
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="SahabTest2Model.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="SahabTest2Model.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="SahabTest2Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="SahabTest2Model.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductStatusId" ColumnName="ProductStatusId" />
+                <ScalarProperty Name="AvailabilityStatus" ColumnName="AvailabilityStatus" />
+                <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
+                <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
